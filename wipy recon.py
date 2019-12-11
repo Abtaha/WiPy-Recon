@@ -27,10 +27,13 @@ def main():
     
     
     # Gets the first three parts of local IP
-    self_ip = socket.gethostbyname(socket.gethostname())
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+    self_ip = s.getsockname()[0]
     ip = self_ip.split(".")
     ip = ip[:-1]
     gen_ip = ip[0] + "." + ip[1] + "." + ip[2] + "."
+    s.close()
 
 
     # Takes Input for operation to perform
@@ -46,6 +49,7 @@ def main():
         print("The IP addresses of the devices connected to this network are:")
     
     
+
     # Loops over the IP with the fourth part being iterated
     length = []
     for i in range(256):
