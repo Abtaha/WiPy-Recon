@@ -51,15 +51,17 @@ def main():
     for i in range(256):
         addr = gen_ip + str(i)
         if ping(addr):
+            mac = get_mac_address(ip = addr)
             if inp == "1":
-                mac = get_mac_address(ip = addr)
                 print(mac)
             elif inp == "2":
-                print(addr)
-            length.append(" ")
+                if mac != None:
+                    print(addr)
+            if mac != None:        
+                length.append(" ")
             
     if inp == "0":
-        print("The number of devices connected are " + len(length))
+        print("The number of devices connected are " + str(len(length)))
 
 
 if __name__ == "__main__":
